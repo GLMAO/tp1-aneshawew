@@ -8,7 +8,7 @@ package org.emp.gl.timer.service;
 /**
  *
  * @author tina
- */
+ */ 
 public interface TimerChangeListener  {
     
     final static String DIXEME_DE_SECONDE_PROP = "dixième" ;
