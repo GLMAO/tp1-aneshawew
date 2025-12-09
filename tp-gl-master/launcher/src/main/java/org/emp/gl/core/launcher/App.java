@@ -1,22 +1,23 @@
 package org.emp.gl.core.launcher;
 
-import org.emp.gl.clients.HorlogeGUI;
+import org.emp.gl.Lookup;
+import org.emp.gl.clients.Horloge;
 import org.emp.gl.timer.service.TimerService;
 import org.emp.gl.timer.service.impl.DummyTimeServiceImpl;
 
 public class App {
-    public static void main(String[] args) {
-        TimerService timerService = new DummyTimeServiceImpl();
+    public static void main(String[] args) throws InterruptedException {
 
-        // Lancer l’horloge graphique
-        new HorlogeGUI(timerService);
+        // Créer le TimerService et l'insérer dans le Lookup
+        TimerService timerService = new DummyTimeServiceImpl();
+        Lookup.getInstance().subscribeService("TimerService", timerService);
+
+        // Créer des horloges qui récupéreront automatiquement le TimerService
+        Horloge h1 = new Horloge("Horloge 1");
+        Horloge h2 = new Horloge("Horloge 2");
 
         // Laisser tourner le programme
-        try {
-            Thread.sleep(60000); // 1 minute
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }
+        Thread.sleep(60000); // 1 minute
 
         System.out.println("Fin du programme.");
     }
