@@ -8,11 +8,13 @@ import org.emp.gl.timer.service.impl.DummyTimeServiceImpl;
 public class App {
     public static void main(String[] args) throws InterruptedException {
 
-        // Créer le TimerService et l'insérer dans le Lookup
+        // Création du TimerService
         TimerService timerService = new DummyTimeServiceImpl();
-        Lookup.getInstance().subscribeService("TimerService", timerService);
 
-        // Créer des horloges qui récupéreront automatiquement le TimerService
+        // Enregistrement dans le Lookup (avec la classe, pas une String)
+        Lookup.getInstance().subscribeService(TimerService.class, timerService);
+
+        // Création d'horloges
         Horloge h1 = new Horloge("Horloge 1");
         Horloge h2 = new Horloge("Horloge 2");
 

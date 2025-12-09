@@ -13,8 +13,8 @@ public class Horloge implements TimerChangeListener {
 
     public Horloge(String nom) {
         this.nom = nom;
-        // Récupération du TimerService depuis le Lookup
-        this.timerService = (TimerService) Lookup.getInstance().getService("TimerService");
+        // Récupération typée du TimerService
+        this.timerService = Lookup.getInstance().getService(TimerService.class);
         timerService.addTimeChangeListener(this);
     }
 
